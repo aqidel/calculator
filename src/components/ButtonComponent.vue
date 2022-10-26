@@ -1,12 +1,21 @@
 <template>
-  <div :class="classComputed" @click="$emit('btnClick', value)">{{ value }}</div>
+  <div :class="classComputed" @click="$emit('btnClick', value)">
+    <DeleteIcon v-if="value == 'DEL'"/>
+    <MutiplyIcon v-else-if="value == '*'"/>
+    <template v-else>{{ value }}</template>
+  </div>
 </template>
 
 <script>
-//import { mdiClose } from '@mdi/js';
+import DeleteIcon from './DeleteIcon.vue';
+import MutiplyIcon from './MultiplyIcon.vue';
 
 export default {
   name: 'ButtonComponent',
+  components: {
+    DeleteIcon,
+    MutiplyIcon
+},
   props: {
     value: String
   },
