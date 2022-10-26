@@ -1,38 +1,44 @@
 <template>
-  <div :class="computedBtnClass">{{ value }}</div>
+  <div :class="classComputed" @click="$emit('btnClick', value)">{{ value }}</div>
 </template>
 
 <script>
+//import { mdiClose } from '@mdi/js';
+
 export default {
   name: 'ButtonComponent',
   props: {
     value: String
   },
   computed: {
-    computedBtnClass() {
-      let classObject = {
-        'cl-button': true,
-        'cl-button-white': false,
-        'cl-button-grey': false,
-        'cl-button-blue': false
-      };
-      if (['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '%', 'C', 'DEL'].includes(this.value)) {
-        classObject['cl-button-white'] = true;
-      } else if (['/', 'x', '-', '+'].includes(this.value)) {
-        classObject['cl-button-grey'] = true;
-      } else if (this.value == '=') {
-        classObject['cl-button-blue'] = true;
+    classComputed() {
+      let initialClass = {
+        'cl-btn': true,
+        'cl-btn-white': false,
+        'cl-btn-grey': false,
+        'cl-btn-blue': false
       }
-      return classObject;
+      let whiteBtns = ['C', '%', 'DEL', '7', '8', '9', '4', '5', '6', '1', '2', '3', '00', '0', ','];
+      let greyBtns = ['/', '*', '-', '+'];
+      if (whiteBtns.includes(this.value)) {
+        initialClass['cl-btn-white'] = true;
+      } else if (greyBtns.includes(this.value)) {
+        initialClass['cl-btn-grey'] = true;
+      } else if (this.value == '=') {
+        initialClass['cl-btn-blue'] = true;
+      }
+      return initialClass;
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
 @media screen and (min-width: 1024px) {
+  
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-  .cl-button {
+
+  .cl-btn {
     border-radius: 50%;
     width: 60px;
     height: 60px;
@@ -43,30 +49,30 @@ export default {
     font-family: 'Roboto', sans-serif;
   }
 
-  .cl-button:hover {
+  .cl-btn:hover {
     cursor: pointer;
   }
 
-  .cl-button-white {
+  .cl-btn-white {
     background-color: #ffffff;
     color: #000000;
   }
 
-  .cl-button-white:active {
+  .cl-btn-white:active {
     background-color: #e6e6e6;
   }
 
-  .cl-button-grey {
+  .cl-btn-grey {
     background-color: #e6e6e6;
     color: #000000;
   }
 
-  .cl-button-blue {
+  .cl-btn-blue {
     background-color: #0066ff;
     color: #ffffff;
   }
 
-  .cl-button-grey:active, .cl-button-blue:active {
+  .cl-btn-grey:active, .cl-btn-blue:active {
     width: 50px;
     height: 50px;
   }
