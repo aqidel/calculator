@@ -1,8 +1,8 @@
 <template>
   <div id="main-wrap">
-    <DisplayComponent :btnValue="btnValue"/>
+    <DisplayComponent ref="displayComponent"/>
     <div id="buttons-wrap">
-      <ButtonComponent v-for="(value, key) in values" :key="key" :value="value" @btn-click="passBtnValue"/>
+      <ButtonComponent v-for="(value, key) in values" :key="key" :value="value" @click="passBtnValue(value)"/>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     passBtnValue(v) {
-      this.btnValue = v;
+      this.$refs.displayComponent.validation(v);
     }
   }
 }

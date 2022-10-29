@@ -1,5 +1,5 @@
 <template>
-  <div :class="classComputed" @click="$emit('btnClick', value)">
+  <div :class="classComputed">
     <DeleteIcon v-if="value == 'DEL'"/>
     <MutiplyIcon v-else-if="value == '*'"/>
     <template v-else>{{ value }}</template>

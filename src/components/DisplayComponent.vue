@@ -14,11 +14,38 @@ export default {
       expression: ''
     }
   },
-  watch: {
-    btnValue() {
-      this.expression = this.expression + this.btnValue
+  methods: {
+    validation(v) {}
+    /*validation(v) {
+      // Can't be shown at display at all
+      if (v == 'C' || v == 'DEL' || v == '=') {
+        return null;
+      }
+      // Only 0-1, '-' can be first symbol 
+      if (this.expression.length == 0 && ['%', '/', '*', '+', '00', ','].includes(v)) {
+        return null;
+      }
+      // 0 can't follow after other 0 except for after '0,'
+      if (this.expression == '0' && v == '0') {
+        return null;
+      }
+      this.expression = this.expression + v;
+    }*/
+  },
+  /*computed: {
+    expression() {
+      return
     }
-  }
+  },*/
+  /*watch: {
+    btnValue() {
+      if (this.validation()) {
+        this.expression = this.expression + this.btnValue;
+      } else {
+        return null;
+      }
+    }
+  }*/
 }
 </script>
 
