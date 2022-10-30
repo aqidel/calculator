@@ -6,16 +6,25 @@
 </template>
 
 <script>
+/* eslint-disable */
 export default {
   name: 'DisplayComponent',
   props: ['btnValue'],
   data() {
     return {
-      expression: ''
+      expression: '',
+      //regexp: new RegExp('^(-?)(((((0?|[1-9]\d+),\d+))|(0|[1-9](\d+)?))[*/+-]?)+$', 'g')
     }
   },
   methods: {
-    validation(v) {}
+    validation(v) {
+      let tempExpression = this.expression + v;
+      if (/^((-?)((0|((0,|[1-9](\d+)?,)(\d+)?)|([1-9](\d+)?))([*/+-]?))?)+$/g.test(tempExpression)) {
+        this.expression = tempExpression;
+      } else {
+        return null;
+      }
+    }
     /*validation(v) {
       // Can't be shown at display at all
       if (v == 'C' || v == 'DEL' || v == '=') {
