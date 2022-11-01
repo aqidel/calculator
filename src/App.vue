@@ -25,7 +25,19 @@ export default {
   },
   methods: {
     passBtnValue(v) {
-      this.$refs.displayComponent.validation(v);
+      switch(v) {
+        case 'C': 
+          this.$refs.displayComponent.clearAll();
+          break;
+        case 'DEL':
+          this.$refs.displayComponent.deleteLast();
+          break;
+        case '=':
+          this.$refs.displayComponent.calculate();
+          break;
+        default:
+          this.$refs.displayComponent.validation(v);
+      }
     }
   }
 }
