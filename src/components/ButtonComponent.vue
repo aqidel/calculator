@@ -27,7 +27,7 @@ export default {
         'cl-btn-grey': false,
         'cl-btn-blue': false
       }
-      let whiteBtns = ['C', '%', 'DEL', '7', '8', '9', '4', '5', '6', '1', '2', '3', '00', '0', ','];
+      let whiteBtns = ['C', '%', 'DEL', '7', '8', '9', '4', '5', '6', '1', '2', '3', '00', '0', '.'];
       let greyBtns = ['/', '*', '-', '+'];
       if (whiteBtns.includes(this.value)) {
         initialClass['cl-btn-white'] = true;

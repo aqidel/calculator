@@ -1,7 +1,7 @@
 <template>
   <div id="display-last-operation"></div>
     <div id="display-result-wrap">
-      <div id="display-result">{{ expression }}</div>
+      <div id="display-result">{{ displayedExpression }}</div>
     </div>
 </template>
 
@@ -11,26 +11,44 @@ export default {
   props: ['btnValue'],
   data() {
     return {
-      expression: ''
+      displayedExpression: '',
+      calculatedExpression: ''
     }
   },
   methods: {
     validation(v) {
-      let tempExpression = this.expression + v;
-      if (/^((-?)((0|((0,|[1-9](\d+)?,)(\d+)?)|([1-9](\d+)?))([%*/+-]?))?)+$/g.test(tempExpression)) {
-        this.expression = tempExpression;
+      let tempExpression = this.displayedExpression + v;
+      if (/^((-?)((0|((0\.|[1-9](\d+)?\.)(\d+)?)|([1-9](\d+)?))([%*/+-]?))?)+$/g.test(tempExpression)) {
+        // regexp doesn't work properly, so a couple of bugfixes here
+        if (tempExpression.endsWith('--')) {
+          return null;
+        }
+        else if (/^.+[*+/]-$/g.test(tempExpression)) {
+          return null;
+        }
+        else if (/^.+(\d+\.\d+\.)$/g.test(tempExpression)) {
+          return null;
+        }
+        else {
+          this.displayedExpression = tempExpression;
+        }
       } else {
         return null;
       }
     },
     clearAll() {
-      this.expression = '';
+      this.displayedExpression = '';
     },
     deleteLast() {
-      this.expression = this.expression.slice(0, -1);
+      this.displayedExpression = this.displayedExpression.slice(0, -1);
     },
     calculate() {
-      //
+      this.calculatedExpression = this.displayedExpression;
+      while (this.calculatedExpression.includes('%')) {
+        let replaced = this.calculatedExpression.replace('%', '*0.01');
+        this.calculatedExpression = replaced;
+      }
+      this.displayedExpression = eval(this.calculatedExpression);
     }
   }
 }
