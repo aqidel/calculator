@@ -1,7 +1,7 @@
 <template>
   <div id="display-last-operation"></div>
     <div id="display-result-wrap">
-      <div id="display-result">{{ displayedExpression }}</div>
+      <div :id="cursorBlink" class="display-result">{{ displayedExpression }}</div>
     </div>
 </template>
 
@@ -12,27 +12,39 @@ export default {
   data() {
     return {
       displayedExpression: '',
-      calculatedExpression: ''
+      calculatedExpression: '',
+      isActive: false
+    }
+  },
+  computed: {
+    cursorBlink() {
+      return this.isActive ? 'display-result-on' : 'display-result-off';
     }
   },
   methods: {
     validation(v) {
+      this.blinker('on');
       let tempExpression = this.displayedExpression + v;
       if (/^((-?)((0|((0\.|[1-9](\d+)?\.)(\d+)?)|([1-9](\d+)?))([%*/+-]?))?)+$/g.test(tempExpression)) {
         // regexp doesn't work properly, so a couple of bugfixes here
         if (tempExpression.endsWith('--')) {
+          this.blinker('off');
           return null;
         }
         else if (/^.+[*+/]-$/g.test(tempExpression)) {
+          this.blinker('off');
           return null;
         }
         else if (/^.+(\d+\.\d+\.)$/g.test(tempExpression)) {
+          this.blinker('off');
           return null;
         }
         else {
+          this.blinker('off');
           this.displayedExpression = tempExpression;
         }
       } else {
+        this.blinker('off');
         return null;
       }
     },
@@ -40,7 +52,9 @@ export default {
       this.displayedExpression = '';
     },
     deleteLast() {
+      this.blinker('on');
       this.displayedExpression = this.displayedExpression.slice(0, -1);
+      this.blinker('off');
     },
     calculate() {
       this.calculatedExpression = this.displayedExpression;
@@ -49,6 +63,14 @@ export default {
         this.calculatedExpression = replaced;
       }
       this.displayedExpression = eval(this.calculatedExpression);
+    },
+    blinker(cmd) {
+      if (cmd == 'on') {
+        this.isActive = true;
+      }
+      else if (cmd == 'off') {
+        setTimeout(() => { this.isActive = false }, 1000);
+      }
     }
   }
 }
@@ -72,33 +94,33 @@ export default {
     background-color: #e6e6e6;
   }
 
-  #display-result-active {
-    border-right: 2px solid #000000;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-    background-color: #e6e6e6;
-  }
-
-  #display-result {
+  .display-result {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end;
     background-color: #e6e6e6;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+  }
+
+  #display-result-off {
     animation-name: cursor;
     animation-duration: 1s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-play-state: running;
-    font-family: 'Roboto', sans-serif;
-    font-size: 30px;
   }
 
   @keyframes cursor {
     0% { border-right: 2px solid #000000; }
     100% {}
+  }
+
+  #display-result-on {
+    border-right: 2px solid #000000;
+    background-color: #e6e6e6;
   }
 }
 </style>
