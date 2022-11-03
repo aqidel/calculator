@@ -17,9 +17,15 @@ export default {
     DisplayComponent,
     ButtonComponent
   },
+  mounted() {
+    window.addEventListener('keydown', this.kbHandler);
+  },
+  beforeUnmount() {
+    window.removeEventListener('keydown', this.kbHandler);
+  },
   data() {
     return {
-      values: ['C', '%', 'DEL', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '00', '0', '.', '='],
+      values: ['C', '%', 'Backspace', '/', '7', '8', '9', '*', '4', '5', '6', '-', '1', '2', '3', '+', '00', '0', '.', '='],
       btnValue: null
     }
   },
@@ -29,7 +35,7 @@ export default {
         case 'C': 
           this.$refs.displayComponent.clearAll();
           break;
-        case 'DEL':
+        case 'Backspace':
           this.$refs.displayComponent.deleteLast();
           break;
         case '=':
@@ -37,6 +43,11 @@ export default {
           break;
         default:
           this.$refs.displayComponent.validation(v);
+      }
+    },
+    kbHandler(e) {
+      if (this.values.includes(e.key)) {
+        this.passBtnValue(e.key);
       }
     }
   }

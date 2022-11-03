@@ -1,6 +1,6 @@
 <template>
   <div :class="classComputed">
-    <DeleteIcon v-if="value == 'DEL'"/>
+    <DeleteIcon v-if="value == 'Backspace'"/>
     <MutiplyIcon v-else-if="value == '*'"/>
     <template v-else>{{ value }}</template>
   </div>
@@ -27,7 +27,7 @@ export default {
         'cl-btn-grey': false,
         'cl-btn-blue': false
       }
-      let whiteBtns = ['C', '%', 'DEL', '7', '8', '9', '4', '5', '6', '1', '2', '3', '00', '0', '.'];
+      let whiteBtns = ['C', '%', 'Backspace', '7', '8', '9', '4', '5', '6', '1', '2', '3', '00', '0', '.'];
       let greyBtns = ['/', '*', '-', '+'];
       if (whiteBtns.includes(this.value)) {
         initialClass['cl-btn-white'] = true;

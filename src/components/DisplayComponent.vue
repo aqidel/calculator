@@ -62,7 +62,7 @@ export default {
         let replaced = this.calculatedExpression.replace('%', '*0.01');
         this.calculatedExpression = replaced;
       }
-      this.displayedExpression = eval(this.calculatedExpression);
+      this.displayedExpression = eval(this.calculatedExpression) + '';
     },
     blinker(cmd) {
       if (cmd == 'on') {
