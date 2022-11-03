@@ -55,16 +55,32 @@ export default {
 </script>
 
 <style>
-@media screen and (min-width: 1024px) {
-  body {
+body {
   display: flex;
   justify-content: center;
   margin: 0;
-  }
+}
 
+@media screen and (min-width: 1024px) {
   #main-wrap {
     margin-top: 100px;
     width: 300px;
+    height: 550px;
+    box-sizing: border-box;
+  }
+
+  #buttons-wrap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 70px);
+    align-items: center;
+    justify-items: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  #main-wrap {
+    width: 100vw;
     height: 550px;
     box-sizing: border-box;
   }

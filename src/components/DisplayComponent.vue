@@ -77,9 +77,26 @@ export default {
 </script>
 
 <style scoped>
-@media screen and (min-width: 1024px) {
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+#display-result-off {
+  animation-name: cursor;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cursor {
+  0% { border-right: 2px solid #000000; }
+  100% {}
+}
+
+#display-result-on {
+  border-right: 2px solid #000000;
+  background-color: #e6e6e6;
+}
+
+@media screen and (min-width: 1024px) {
   #display-last-operation {
     width: 100%;
     height: 150px;
@@ -105,22 +122,33 @@ export default {
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
   }
+}
 
-  #display-result-off {
-    animation-name: cursor;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-  }
-
-  @keyframes cursor {
-    0% { border-right: 2px solid #000000; }
-    100% {}
-  }
-
-  #display-result-on {
-    border-right: 2px solid #000000;
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  #display-last-operation {
+    width: 100vw;
+    height: 150px;
     background-color: #e6e6e6;
+  }
+
+  #display-result-wrap {
+    padding: 8px;
+    width: 100vw;
+    height: 50px;
+    box-sizing: border-box;
+    background-color: #e6e6e6;
+  }
+
+  .display-result {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: #e6e6e6;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
   }
 }
 </style>

@@ -43,42 +43,57 @@ export default {
 </script>
 
 <style>
-@media screen and (min-width: 1024px) {
-  
-  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.cl-btn {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.cl-btn:hover {
+  cursor: pointer;
+}
+
+.cl-btn-white {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.cl-btn-white:active {
+  background-color: #e6e6e6;
+}
+
+.cl-btn-grey {
+  background-color: #e6e6e6;
+  color: #000000;
+}
+
+.cl-btn-blue {
+  background-color: #0066ff;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 1024px) {
   .cl-btn {
-    border-radius: 50%;
     width: 60px;
     height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 20px;
-    font-family: 'Roboto', sans-serif;
   }
 
-  .cl-btn:hover {
-    cursor: pointer;
+  .cl-btn-grey:active, .cl-btn-blue:active {
+    width: 50px;
+    height: 50px;
   }
+}
 
-  .cl-btn-white {
-    background-color: #ffffff;
-    color: #000000;
-  }
-
-  .cl-btn-white:active {
-    background-color: #e6e6e6;
-  }
-
-  .cl-btn-grey {
-    background-color: #e6e6e6;
-    color: #000000;
-  }
-
-  .cl-btn-blue {
-    background-color: #0066ff;
-    color: #ffffff;
+@media screen and (min-width: 320px) and (max-width: 425px) {
+  .cl-btn {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
   }
 
   .cl-btn-grey:active, .cl-btn-blue:active {
